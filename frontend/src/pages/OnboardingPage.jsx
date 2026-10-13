@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { skills, profile, careers, skillGap, roadmap } from '../services/api';
 import ErrorMessage from '../components/ErrorMessage';
 import LoadingSpinner from '../components/LoadingSpinner';
+import CollegeAutocomplete from '../components/CollegeAutocomplete';
 
 export default function OnboardingPage() {
   const { user } = useAuth();
@@ -174,7 +175,8 @@ export default function OnboardingPage() {
     setError('');
     try {
       // 1. Save user profile info
-      await profile.updateProfile({ name: fullName, education: highestEducation + ' - ' + specialization });
+      const fullEdu = highestEducation + ' - ' + specialization + (institution ? ` (${institution})` : '');
+      await profile.updateProfile({ name: fullName, education: fullEdu });
 
       // 2. Save skills to backend
       await skills.bulkAddSkills(userSkills.map(s => ({ skill_id: s.skill_id, proficiency_level: s.proficiency_level })));
@@ -313,7 +315,11 @@ export default function OnboardingPage() {
                   </div>
                   <div className="form-group">
                     <label className="form-label">Institution / College Name</label>
-                    <input type="text" className="form-input" value={institution} onChange={e => setInstitution(e.target.value)} placeholder="e.g. National Institute of Technology" />
+                    <CollegeAutocomplete
+                      value={institution}
+                      onChange={setInstitution}
+                      placeholder="e.g. Bannari Amman Institute of Technology"
+                    />
                   </div>
                 </div>
               </div>

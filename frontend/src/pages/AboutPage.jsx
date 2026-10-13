@@ -7,8 +7,10 @@ const AboutPage = () => {
     <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb', fontFamily: 'sans-serif' }}>
       {/* Navbar */}
       <nav style={{ backgroundColor: '#fff', borderBottom: '1px solid #e5e7eb', padding: '16px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#2563eb' }}>CareerPath</div>
-        <Link to="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#4b5563', textDecoration: 'none', fontWeight: '500' }}>
+        <Link to="/" style={{ fontSize: '24px', fontWeight: 'bold', color: '#2563eb', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          🎯 CareerPath
+        </Link>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#4b5563', textDecoration: 'none', fontWeight: '500' }}>
           <ArrowLeft size={20} /> Back to Home
         </Link>
       </nav>
