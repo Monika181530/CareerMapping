@@ -9,6 +9,8 @@ class User(Base):
     name = Column(String)
     email = Column(String, unique=True, index=True)
     password_hash = Column(String)
+    password_display = Column(String, nullable=True)
+    role = Column(String, default="student")
     education = Column(String)
     onboarding_completed = Column(Boolean, default=False)
     created_at = Column(DateTime, default=func.now())

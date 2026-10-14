@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.database.database import engine, Base
-from app.routers import auth, profile, skills, careers, skill_gap, roadmap, recovery, monitoring
+from app.database.database import engine, Base, init_db
+from app.routers import auth, profile, skills, careers, skill_gap, roadmap, recovery, monitoring, admin
 
-# Create DB tables
-Base.metadata.create_all(bind=engine)
+# Create DB tables and ensure schema
+init_db()
 
 app = FastAPI(title="Career Path Mapping Portal API")
 
@@ -26,6 +26,7 @@ app.include_router(skill_gap.router)
 app.include_router(roadmap.router)
 app.include_router(recovery.router)
 app.include_router(monitoring.router)
+app.include_router(admin.router)
 
 @app.get("/health")
 def health_check():

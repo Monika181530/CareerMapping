@@ -1,10 +1,10 @@
-﻿import React from 'react';
+import React from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, User, BookOpen, Target, Clock, Activity,
   Map, MonitorPlay, ShieldAlert, GitBranch, GitCompare,
-  Recycle, TrendingUp, Settings, LogOut
+  Recycle, TrendingUp, Settings, LogOut, Shield
 } from 'lucide-react';
 import '../styles/global.css';
 
@@ -64,6 +64,27 @@ const DashboardLayout = () => {
           🎯 CareerPath
         </div>
         <nav style={{ flex: 1, padding: '16px 0' }}>
+          {user?.role === 'admin' && (
+            <NavLink
+              to="/admin"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '10px 20px',
+                color: '#c084fc',
+                background: 'rgba(168, 85, 247, 0.15)',
+                textDecoration: 'none',
+                gap: '12px',
+                fontSize: '13px',
+                fontWeight: 700,
+                borderLeft: '4px solid #c084fc',
+                marginBottom: '10px'
+              }}
+            >
+              <Shield size={18} />
+              Admin Console
+            </NavLink>
+          )}
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path || (currentItem && currentItem.path === item.path);

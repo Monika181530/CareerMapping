@@ -84,4 +84,13 @@ export const recovery = {
   getTransferableSkills: () => api.get('/career-recovery/transferable-skills').then(res => res.data),
 };
 
+export const admin = {
+  getOverview: () => api.get('/admin/overview').then(res => res.data),
+  getUsers: () => api.get('/admin/users').then(res => res.data),
+  getUserDossier: (id) => api.get(`/admin/users/${id}`).then(res => res.data),
+  createUser: (data) => api.post('/admin/users', data).then(res => res.data),
+  updateUser: (id, data) => api.put(`/admin/users/${id}`, data).then(res => res.data),
+  deleteUser: (id) => api.delete(`/admin/users/${id}`).then(res => res.data),
+};
+
 export default api;

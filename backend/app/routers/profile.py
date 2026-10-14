@@ -29,6 +29,7 @@ def get_me(current_user: User = Depends(get_current_user), db: Session = Depends
         "user_id": current_user.id,
         "name": current_user.name,
         "email": current_user.email,
+        "role": current_user.role or "student",
         "education": current_user.education,
         "onboarding_completed": is_completed
     }

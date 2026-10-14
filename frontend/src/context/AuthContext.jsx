@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
               id: liveUser.user_id,
               name: liveUser.name,
               email: liveUser.email,
+              role: liveUser.role || 'student',
               education: liveUser.education,
               onboarding_completed: liveUser.onboarding_completed
             };

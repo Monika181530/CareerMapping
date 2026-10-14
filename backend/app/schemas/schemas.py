@@ -4,23 +4,40 @@ from datetime import date, datetime
 
 class UserBase(BaseModel):
     name: str
-    email: EmailStr
+    email: str
     education: Optional[str] = None
+    role: Optional[str] = "student"
     onboarding_completed: Optional[bool] = False
 
 class UserCreate(UserBase):
     password: str
 
 class UserLogin(BaseModel):
-    email: EmailStr
+    email: str
     password: str
 
 class UserResponse(UserBase):
     id: int
+    role: str = "student"
     onboarding_completed: bool = False
     created_at: datetime
     class Config:
         from_attributes = True
+
+class UserAdminUpdate(BaseModel):
+    name: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None
+    education: Optional[str] = None
+    role: Optional[str] = None
+    onboarding_completed: Optional[bool] = None
+
+class UserAdminCreate(BaseModel):
+    name: str
+    email: str
+    password: str
+    education: Optional[str] = "B.E / B.Tech"
+    role: Optional[str] = "student"
 
 class Token(BaseModel):
     access_token: str

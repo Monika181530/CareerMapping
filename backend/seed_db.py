@@ -1,6 +1,6 @@
 import os
 import datetime
-from app.database.database import engine, SessionLocal, Base
+from app.database.database import engine, SessionLocal, Base, init_db
 from app.models.models import (
     User, Skill, Career, CareerSkill, UserSkill,
     UserCareerGoal, UserConstraint, UserInterest, TransferableSkillMapping
@@ -8,7 +8,7 @@ from app.models.models import (
 from app.utils.security import get_password_hash
 
 def seed():
-    Base.metadata.create_all(bind=engine)
+    init_db()
     db = SessionLocal()
 
     # Clear existing
@@ -106,12 +106,25 @@ def seed():
             cs = CareerSkill(career_id=car.id, skill_id=sk.id, importance_weight=weight, required_level=level)
             db.add(cs)
 
-    # 4. Demo User
+    # 4. Users (Admin + Demo Student)
+    admin_user = User(
+        name="System Administrator",
+        email="admin@career.com",
+        password_hash=get_password_hash("admin123"),
+        password_display="admin123",
+        role="admin",
+        education="M.Tech Computer Science (Faculty Admin)",
+        onboarding_completed=True
+    )
+    db.add(admin_user)
+
     demo_user = User(
         name="Demo Student",
         email="demo@career.com",
         password_hash=get_password_hash("demo123"),
-        education="B.E. Information Technology",
+        password_display="demo123",
+        role="student",
+        education="B.E. Information Technology (BIT Sathy)",
         onboarding_completed=True
     )
     db.add(demo_user)
