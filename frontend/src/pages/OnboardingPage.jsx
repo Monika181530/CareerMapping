@@ -5,6 +5,7 @@ import { skills, profile, careers, skillGap, roadmap } from '../services/api';
 import ErrorMessage from '../components/ErrorMessage';
 import LoadingSpinner from '../components/LoadingSpinner';
 import CollegeAutocomplete from '../components/CollegeAutocomplete';
+import DepartmentAutocomplete from '../components/DepartmentAutocomplete';
 
 export default function OnboardingPage() {
   const { user } = useAuth();
@@ -21,7 +22,7 @@ export default function OnboardingPage() {
 
   // Step 2: Education
   const [highestEducation, setHighestEducation] = useState(user?.education || 'B.E / B.Tech');
-  const [specialization, setSpecialization] = useState('Information Technology');
+  const [specialization, setSpecialization] = useState('');
   const [currentYear, setCurrentYear] = useState('3rd Year');
   const [institution, setInstitution] = useState('');
 
@@ -175,7 +176,7 @@ export default function OnboardingPage() {
     setError('');
     try {
       // 1. Save user profile info
-      const fullEdu = highestEducation + ' - ' + specialization + (institution ? ` (${institution})` : '');
+      const fullEdu = highestEducation + (specialization ? ` - ${specialization}` : '') + (institution ? ` (${institution})` : '');
       await profile.updateProfile({ name: fullName, education: fullEdu });
 
       // 2. Save skills to backend
@@ -297,8 +298,12 @@ export default function OnboardingPage() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Degree / Specialization *</label>
-                    <input type="text" className="form-input" value={specialization} onChange={e => setSpecialization(e.target.value)} placeholder="e.g. Information Technology / Computer Science" />
+                    <label className="form-label">Degree / Specialization</label>
+                    <DepartmentAutocomplete
+                      value={specialization}
+                      onChange={setSpecialization}
+                      placeholder="e.g. Computer Science and Engineering / IT"
+                    />
                   </div>
                 </div>
 
