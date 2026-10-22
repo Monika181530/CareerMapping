@@ -7,30 +7,11 @@ import { auth } from '../services/api';
 const LandingPage = () => {
   const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
-  const [demoLoading, setDemoLoading] = useState(false);
-
   const handleStartJourney = () => {
     if (isAuthenticated) {
       navigate('/onboarding');
     } else {
       navigate('/register');
-    }
-  };
-
-  const handleDemoLogin = async () => {
-    setDemoLoading(true);
-    try {
-      const response = await auth.login({ email: 'demo@career.com', password: 'demo123' });
-      if (response && response.access_token) {
-        login(response.access_token, response.user);
-        navigate('/dashboard');
-      } else {
-        navigate('/login');
-      }
-    } catch (err) {
-      navigate('/login');
-    } finally {
-      setDemoLoading(false);
     }
   };
 
@@ -47,22 +28,6 @@ const LandingPage = () => {
             <Link to="/dashboard" className="btn btn-primary" style={{ textDecoration: 'none' }}>Go to Dashboard</Link>
           ) : (
             <>
-              <button
-                onClick={handleDemoLogin}
-                disabled={demoLoading}
-                style={{
-                  background: 'rgba(59, 130, 246, 0.1)',
-                  border: '1px solid var(--accent)',
-                  color: 'var(--accent)',
-                  padding: '8px 16px',
-                  borderRadius: '6px',
-                  fontWeight: 600,
-                  fontSize: '14px',
-                  cursor: 'pointer'
-                }}
-              >
-                {demoLoading ? 'Loading Demo...' : '⚡ Instant Demo'}
-              </button>
               <Link to="/login" style={{ textDecoration: 'none', color: 'var(--text-secondary)', fontWeight: 500 }}>Login</Link>
               <Link to="/register" className="btn btn-primary" style={{ textDecoration: 'none' }}>Get Started</Link>
             </>
@@ -87,11 +52,6 @@ const LandingPage = () => {
               <button onClick={handleStartJourney} className="btn" style={{ background: 'var(--accent)', color: 'white', padding: '14px 32px', fontSize: '18px', fontWeight: 'bold', borderRadius: '8px', border: 'none', cursor: 'pointer', boxShadow: '0 4px 14px rgba(59,130,246,0.4)' }}>
                 Start My Career Journey →
               </button>
-              {!isAuthenticated && (
-                <button onClick={handleDemoLogin} disabled={demoLoading} className="btn" style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '14px 28px', fontSize: '18px', fontWeight: 'bold', borderRadius: '8px', cursor: 'pointer', backdropFilter: 'blur(4px)' }}>
-                  {demoLoading ? 'Signing in...' : '⚡ Try Live Demo'}
-                </button>
-              )}
               <Link to="/about" className="btn" style={{ background: 'transparent', border: '2px solid rgba(255,255,255,0.4)', color: 'white', padding: '14px 28px', fontSize: '18px', fontWeight: 'bold', borderRadius: '8px', textDecoration: 'none' }}>
                 How It Works
               </Link>

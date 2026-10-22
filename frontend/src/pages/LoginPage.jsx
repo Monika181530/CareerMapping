@@ -48,75 +48,8 @@ export default function LoginPage() {
           </Link>
           <span style={{ fontSize: '12px', padding: '3px 8px', borderRadius: '12px', background: 'rgba(59,130,246,0.1)', color: 'var(--accent)', fontWeight: 600 }}>Secure Portal</span>
         </div>
-        <h1 style={{ textAlign: 'center', marginBottom: '16px', color: 'var(--accent)', fontSize: '24px' }}>CareerPath Sign In</h1>
+        <h1 style={{ textAlign: 'center', marginBottom: '24px', color: 'var(--accent)', fontSize: '24px' }}>CareerPath Sign In</h1>
         {error && <ErrorMessage message={error} />}
-        
-        {/* Quick Demo Access Card */}
-        <div style={{ background: 'var(--surface-2)', padding: '14px', borderRadius: '8px', marginBottom: '20px', fontSize: '13px', border: '1px solid var(--border)' }}>
-          <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-            ⚡ Quick 1-Click Credentials:
-          </div>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {/* Admin autofill button */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface)', padding: '8px 10px', borderRadius: '6px', border: '1px solid var(--border)' }}>
-              <div>
-                <span style={{ fontWeight: 600, color: '#9333ea', fontSize: '12px' }}>🛡️ Administrator:</span>
-                <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
-                  User: <code>admin</code> &bull; Pass: <code>admin123</code>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setEmail('admin@career.com');
-                  setPassword('admin123');
-                }}
-                style={{
-                  fontSize: '11px',
-                  padding: '4px 10px',
-                  borderRadius: '4px',
-                  border: 'none',
-                  background: '#9333ea',
-                  color: 'white',
-                  cursor: 'pointer',
-                  fontWeight: 600
-                }}
-              >
-                Autofill Admin
-              </button>
-            </div>
-
-            {/* Student autofill button */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface)', padding: '8px 10px', borderRadius: '6px', border: '1px solid var(--border)' }}>
-              <div>
-                <span style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '12px' }}>🎓 Demo Student:</span>
-                <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
-                  User: <code>demo@career.com</code> &bull; Pass: <code>demo123</code>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setEmail('demo@career.com');
-                  setPassword('demo123');
-                }}
-                style={{
-                  fontSize: '11px',
-                  padding: '4px 10px',
-                  borderRadius: '4px',
-                  border: 'none',
-                  background: 'var(--accent)',
-                  color: 'white',
-                  cursor: 'pointer',
-                  fontWeight: 600
-                }}
-              >
-                Autofill Student
-              </button>
-            </div>
-          </div>
-        </div>
 
         <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>

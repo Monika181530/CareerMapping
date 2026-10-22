@@ -26,7 +26,7 @@ export default function AdminPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
   const [feasibilityFilter, setFeasibilityFilter] = useState('all');
-  const [showAllPasswords, setShowAllPasswords] = useState(true);
+  const [showAllPasswords, setShowAllPasswords] = useState(false);
 
   // Modals
   const [dossierUserId, setDossierUserId] = useState(null);
